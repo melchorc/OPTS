@@ -1,0 +1,447 @@
+﻿<%@ Page Title="" Theme="Default" Language="C#" MasterPageFile="~/AccountSite.master"
+    AutoEventWireup="true" CodeFile="UserAccount(HA).aspx.cs" Inherits="UserAccount_HO" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<%--<%@ Register TagName="OnlineBooking" Src="~/App_Controls/OnlineBooking.ascx" TagPrefix="ctr" %>--%>
+<%@ Register TagName="OptionDialog" Src="~/App_Controls/OptionDialog.ascx" TagPrefix="ctr" %>
+<%@ Register TagName="DataView" Src="~/App_Controls/DataView.ascx" TagPrefix="ctr" %>
+<%@ Register TagName="PersonalDetails" Src="~/App_Controls/PersonalDetails.ascx" TagPrefix="ctr" %>
+<%@ Register TagName="AddressDetails" Src="~/App_Controls/AddressDetails.ascx" TagPrefix="ctr" %>
+<%@ Register TagName="ContactInformation" Src="~/App_Controls/ContactInformation.ascx" TagPrefix="ctr" %>
+<%@ Register TagName="Report" Src="~/App_Controls/Report.ascx" TagPrefix="ctr" %>
+<%@ MasterType VirtualPath="~/AccountSite.master" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="H" runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="M" runat="Server">
+    <script type="text/javascript">
+        // <![CDATA[
+        //$('#example').tabs({
+        //    select: function(event, ui) {
+        //        var isValid = 
+        //        return isValid;
+        //    }
+        //});
+        // ]]> 
+    </script>
+      <asp:ToolkitScriptManager ID="ToolkitScriptManager2" runat="server" ScriptMode="Release">
+            <%--            <ControlBundles>
+                    <asp:ControlBundle Name="Calendar" />
+            </ControlBundles>    --%>
+        </asp:ToolkitScriptManager>
+        <asp:UpdatePanel ID="updAccountContent" runat="server" style="height:100%">
+            <ContentTemplate>
+                <h1 style="color: white;
+                background-color: #1279c0;
+                margin: 0px;
+                padding: 25px;">
+                    <asp:Label ID="lblPageTitle" runat="server" Text="Admin"></asp:Label></h1>
+                <asp:MultiView ID="muvAccountView" runat="server">
+                    <asp:View ID="viewHeadOperation" runat="server">
+                        <asp:TabContainer ID="TabContainer8" runat="server" UseVerticalStripPlacement="true">
+                            <asp:TabPanel ID="tabTrack" runat="server" HeaderText="Track">
+                                <HeaderTemplate>Track</HeaderTemplate>
+                                <ContentTemplate>
+                                    <ctr:DataView ID="dvView1" runat="server" SearchButton="Search" SearchTitle="Employee Name or ID:" />
+                                </ContentTemplate>
+                            </asp:TabPanel>
+                            <asp:TabPanel ID="tabReports" runat="server" HeaderText="TabPanel1">
+                                <HeaderTemplate>Reports</HeaderTemplate>
+                                <ContentTemplate>
+                                    <ctr:Report ID="HOReport" runat="server" />
+                                </ContentTemplate>
+                            </asp:TabPanel>
+                            <asp:TabPanel ID="pnlEmployeeAcc" runat="server" HeaderText="TabPanel9">
+                                <HeaderTemplate>Employee Account</HeaderTemplate>
+                                <ContentTemplate>
+                                    <ctr:DataView ID="dvEmployees" runat="server" SearchButton="Search" SearchTitle="Employee Name or ID:" />
+                                    <asp:Table ID="Table11" runat="server">
+                                        <asp:TableRow ID="TableRow2" runat="server">
+                                            <asp:TableCell ID="TableCell1" runat="server">
+                                                <asp:Button ID="btnAddEmployee" runat="server" Text="Add" CausesValidation="false" UseSubmitBehavior="False" OnClick="btnAddEmployee_Click" />
+                                            </asp:TableCell>
+                                            <asp:TableCell>
+                                                <asp:Button ID="btnEditEmployee" runat="server" Text="Edit" CausesValidation="false" UseSubmitBehavior="False" OnClick="btnEditEmployee_Click" />
+                                            </asp:TableCell>
+                                            <asp:TableCell ID="TableCell2" runat="server">
+                                                <asp:Button ID="btnRemoveEmployee" runat="server" Text="Remove" CausesValidation="false" UseSubmitBehavior="False" />
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+                                    </asp:Table>
+                                </ContentTemplate>
+                            </asp:TabPanel>
+                            
+                            <asp:TabPanel ID="pnlServices" runat="server" HeaderText="TabPanel9">
+                                <HeaderTemplate>Services</HeaderTemplate>
+                                <ContentTemplate>
+                                    <h5><asp:Label ID="Label6" runat="server" Text="Services"></asp:Label></h5>
+                                    <hr />
+                                    <fieldset>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                    <asp:GridView ID="gvServices" ShowHeader="false" AutoGenerateColumns="false" runat="server" style="width:400px">
+                                        <Columns>
+                                            <asp:TemplateField>
+                                                <HeaderTemplate>
+                                                 </HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <asp:LinkButton  Font-Bold="true" ID="lnkBtnServiceName" runat="server" CommandName="Select" Text='<%# Bind("Service_Name") %>'></asp:LinkButton>
+                                                    <asp:Label ID="lblServiceID" runat="server" Text='<%# Bind("Service_ID") %>' Visible="false"></asp:Label>
+                                                    <br/>
+                                                    <asp:Label ID="Label7" runat="server" Text="Range weight:&nbsp;"  Font-Bold="true"></asp:Label> 
+                                                    <asp:Label ID="lblMinWgt" runat="server" Text='<%# Bind("MinWgt") %>' ></asp:Label>kg-
+                                                    <asp:Label ID="lblMaxWgt" runat="server" Text='<%# Bind("MaxWgt") %>' ></asp:Label>kg
+                                                    <br />
+                                                    <asp:Label ID="Label8" runat="server" Text="Price:&nbsp;"  Font-Bold="true"></asp:Label>
+                                                    <asp:Label ID="Label5" runat="server" Text='<%# Bind("Price") %>' ></asp:Label>
+                                                    <br />
+                                                    <asp:Label ID="Label9" runat="server" Text="Description:" Font-Bold="true"></asp:Label>
+                                                    <br />
+                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="lblServiceDesc" runat="server" Text='<%# Bind("Service_Desc") %>' ></asp:Label>
+                                                    
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+                                                    </td>
+                                                <td>
+
+                                                    <asp:Table ID="Table13" runat="server">
+                                        <asp:TableRow>
+                                            <asp:TableCell>
+                                                <asp:Label ID="lblServiceName" runat="server" Text="Service Name:"></asp:Label>
+                                            </asp:TableCell>
+                                            <asp:TableCell>
+                                                <asp:TextBox ID="txtServiceName" MaxLength="20" runat="server"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="reqServiceName" ValidationGroup="valServices" ControlToValidate="txtServiceName" SkinID="ask" runat="server"></asp:RequiredFieldValidator>
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+                                        <asp:TableRow>
+                                            <asp:TableCell>
+                                                <asp:Label ID="lblMinWeight" runat="server" Text="MinWgt(kg):"></asp:Label>
+                                            </asp:TableCell>
+                                            <asp:TableCell>
+                                                <asp:TextBox ID="txtMinWeight" MaxLength="7" runat="server"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="reqTxtMinWeight" ValidationGroup="valServices" ControlToValidate="txtMinWeight" SkinID="ask" runat="server"></asp:RequiredFieldValidator>
+                                                <asp:RegularExpressionValidator ID="regTxtMinWeight" ValidationGroup="valServices" runat="server" ValidationExpression="\d{0,7}(.\d{1,4})?" ControlToValidate="txtMinWeight"></asp:RegularExpressionValidator>
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+                                        <asp:TableRow>
+                                            <asp:TableCell>
+                                                <asp:Label ID="lblMaxWeight" runat="server" Text="MaxWgt(kg):"></asp:Label>
+                                            </asp:TableCell>
+                                            <asp:TableCell>
+                                                <asp:TextBox ID="txtMaxWeight" MaxLength="7" runat="server"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="reqTxtMaxWeight" ValidationGroup="valServices" ControlToValidate="txtMaxWeight" SkinID="ask" runat="server"></asp:RequiredFieldValidator>
+                                                <asp:RegularExpressionValidator ID="regTxtMaxWeight" ValidationGroup="valServices" runat="server" ValidationExpression="\d{0,7}(.\d{1,4})?" ControlToValidate="txtMaxWeight"></asp:RegularExpressionValidator>
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+                                        <asp:TableRow>
+                                            <asp:TableCell>
+                                                <asp:Label ID="lblPrice" runat="server" Text="Service Price(Php):"></asp:Label>
+                                            </asp:TableCell>
+                                            <asp:TableCell>
+                                                <asp:TextBox ID="txtPrice" MaxLength="7" runat="server"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="reqTxtPrice" ValidationGroup="valServices" ControlToValidate="txtPrice" SkinID="ask" runat="server"></asp:RequiredFieldValidator>
+                                                <asp:RegularExpressionValidator ID="regTxtPrice" ValidationGroup="valServices" runat="server" ValidationExpression="\d{0,7}(.\d{1,4})?" ControlToValidate="txtPrice"></asp:RegularExpressionValidator>
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+                                        <asp:TableRow>
+                                            <asp:TableCell>
+                                                <asp:Label ID="lblServiceDesc" runat="server" Text="Service Description:"></asp:Label>
+                                            </asp:TableCell>
+                                            <asp:TableCell>
+                                                <asp:TextBox ID="txtServiceDesc" TextMode="MultiLine" Height="90px" runat="server"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="reqTxtServiceDesc" ValidationGroup="valServices" ControlToValidate="txtServiceDesc" runat="server"></asp:RequiredFieldValidator>
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+                                        <asp:TableRow ID="TableRow4" runat="server">
+                                            <asp:TableCell>
+                                            
+                                            </asp:TableCell>
+                                            <asp:TableCell>
+                                                <asp:Button ID="btnRemoveService" runat="server" Text="Remove" UseSubmitBehavior="False" />
+                                                &nbsp;&nbsp;&nbsp;
+                                            <asp:Button ID="btnAddService" runat="server" Text="Add" UseSubmitBehavior="False" />
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+                                    </asp:Table>
+
+                                                </td>
+                                                </tr>
+                                            </table>
+                                        </fieldset>
+                                </ContentTemplate>
+                            </asp:TabPanel>
+                            <asp:TabPanel ID="pnlLocation" runat="server" HeaderText="TabPanel9">
+                                <HeaderTemplate>Locations</HeaderTemplate>
+                                <ContentTemplate>
+                                    <h5><asp:Label ID="Label2" runat="server" Text="Locations"></asp:Label></h5>
+                                    <asp:Table ID="Table16" runat="server">
+                                        <asp:TableRow HorizontalAlign="Left">
+                                            <asp:TableCell VerticalAlign="Top">
+                                                <fieldset>
+                                                    <legend>&nbsp;
+                                                        <asp:Label ID="lblLegendProvince" runat="server" Text="Provinces"></asp:Label>
+                                                    </legend>
+                                                <table>
+                                                    <tr><td>
+                                                        <asp:RequiredFieldValidator ID="reqTxtAddProvince" ValidationGroup="valAddProvince" ControlToValidate="txtAddProvince" runat="server"></asp:RequiredFieldValidator>
+                                                        <asp:RegularExpressionValidator ID="regTxtAddProvince" runat="server" ValidationGroup="valAddProvince" ControlToValidate="txtAddProvince" ValidationExpression="([A-ZÑ][a-zñ]+).?(([ ]?[A-ZÑ]([a-zñ])+){0,2})"></asp:RegularExpressionValidator>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><asp:TextBox ID="txtAddProvince" ValidationGroup="valAddProvince" runat="server"></asp:TextBox>
+                                                        </td>
+                                                        <td><asp:Button ID="btnProvince" ValidationGroup="valAddProvince" runat="server" SkinID="Button8" Text="Add" /></td>
+                                                    </tr>
+                                                </table>
+                                                
+                                                <asp:GridView ID="gvProvinces" runat="server" Width="200px" AutoGenerateColumns="False"
+                                                                OnRowEditing="gvProvinces_RowEditing"
+                                                                OnRowCancelingEdit="gvProvinces_RowCancelingEdit"
+                                                    OnSelectedIndexChanging="gvProvinces_SelectedIndexChanging"
+                                                    OnSelectedIndexChanged="gvProvinces_SelectedIndexChanged"
+                                                    OnPageIndexChanging="gvProvinces_PageIndexChanging"
+                                                     ShowHeader="False"
+                                                               >
+                                                                <Columns>
+                                                                    <asp:TemplateField>
+                                                                        <InsertItemTemplate>
+                                                                        </InsertItemTemplate>
+                                                                        <ItemTemplate>
+                                                                            <asp:Panel CssClass="popupMenu" ID="PopupMenu" runat="server">
+                                                                                <div style="border: 1px outset white; padding: 2px;">
+                                                                                    <div>
+                                                                                        <asp:LinkButton ID="btnEditProvince" CausesValidation="false" runat="server" CommandName="Edit" Text="Edit" />
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <asp:LinkButton ID="btnDeleteProvince" CausesValidation="false" runat="server" CommandName="Delete" Text="Delete" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </asp:Panel>
+                                                                            <asp:Panel ID="pnlProvinceDesc" runat="server">
+                                                                                <asp:Label ID="lblProvinceID" runat="server" Text='<%# Bind("Province_ID") %>' Visible="false"></asp:Label>
+                                                                                <asp:LinkButton ID="lnkProvinceDesc" SkinID="ForceLeft" CausesValidation="false" runat="server" CommandName="Select" Text='<%# Bind("Province_Desc") %>' />
+                                                                            </asp:Panel>
+                                                                            <asp:HoverMenuExtender ID="hme2" runat="Server"
+                                                                                HoverCssClass="popupHover"
+                                                                                PopupControlID="PopupMenu"
+                                                                                PopupPosition="Left"
+                                                                                TargetControlID="pnlProvinceDesc"
+                                                                                PopDelay="25" />
+                                                                        </ItemTemplate>
+                                                                        <EditItemTemplate>
+                                                                            <asp:Panel ID="Panel9" runat="server" Width="80%">
+                                                                                <asp:Label ID="lblProvinceID" runat="server" Text='<%# Bind("Province_ID") %>' Visible="false"></asp:Label>
+                                                                                <asp:TextBox ID="txtProvince" SkinID="Free" Style="width: 100%;" ValidationGroup="valProvinces" Text='<%# Bind("Province_Desc") %>' runat="server"></asp:TextBox>
+                                                                            </asp:Panel>
+                                                                            <asp:HoverMenuExtender ID="hme1" runat="Server"
+                                                                                TargetControlID="Panel9"
+                                                                                PopupControlID="PopupMenu"
+                                                                                HoverCssClass="popupHover"
+                                                                                PopupPosition="Right" />
+                                                                            <asp:Panel ID="PopupMenu" runat="server" CssClass="popupMenu" Width="80">
+                                                                                <div style="border: 1px outset white">
+                                                                                    <asp:LinkButton ID="LinkButton1" runat="server"
+                                                                                        CausesValidation="True" ValidationGroup="valProvinces" CommandName="Update" SkinID="ForceLeft" Text="Update" />
+                                                                                    <br />
+                                                                                    <asp:LinkButton ID="LinkButton2" runat="server"
+                                                                                        CausesValidation="False" ValidationGroup="valProvinces" CommandName="Cancel" SkinID="ForceLeft" Text="Cancel" />
+                                                                                </div>
+                                                                            </asp:Panel>
+                                                                        </EditItemTemplate>
+                                                                    </asp:TemplateField>
+                                                                </Columns>
+                                                                <EmptyDataTemplate>
+                                                                            <asp:Label ID="lblPrMessage" runat="server" SkinID="ForceLeft" Text="Populate provinces on this Section"></asp:Label>
+                                                                            <asp:LinkButton ID="lnkAddProvince" runat="server">Add New</asp:LinkButton>
+                                                                </EmptyDataTemplate>
+                                                            </asp:GridView>
+                                                </fieldset>
+                                            </asp:TableCell>
+                                            <asp:TableCell VerticalAlign="Top">
+                                                <fieldset>
+                                                    <legend>&nbsp;
+                                                        <asp:Label ID="lblLocation" runat="server" Text="Municipality/City"></asp:Label>
+                                                    </legend>
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Button ID="btnAddLocations" SkinID="Button8" runat="server" Text="Add" CausesValidation="false" /> 
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3">
+                                                            <asp:GridView ID="gvMCnZip" AutoGenerateColumns="false" runat="server" style="width:225px"
+                                                                OnRowDeleting="gvMCnZip_RowDeleting"
+                                                                OnRowEditing="gvMCnZip_RowEditing"
+                                                                OnPageIndexChanging="gvMCnZip_PageIndexChanging"
+                                                                OnRowUpdating="gvMCnZip_RowUpdating"
+                                                                OnRowCancelingEdit="gvMCnZip_RowCancelingEdit"
+                                                                >
+                                                                <EmptyDataTemplate>
+                                                                            <asp:Label ID="lblLocMessage" runat="server" SkinID="ForceLeft" Text="Populate locations on this Section"></asp:Label>
+                                                                            <asp:LinkButton ID="lnkAddLoc" runat="server">Add New</asp:LinkButton>
+                                                                </EmptyDataTemplate>
+                                                                <Columns>
+                                                                    <asp:TemplateField>
+                                                                        <ItemTemplate>
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td><asp:LinkButton ID="btnEditLoc" CausesValidation="false" runat="server" CommandName="Edit" Text="Edit" /></td>
+                                                                                    <td><asp:LinkButton ID="btnDeleteLoc" CausesValidation="false" runat="server" CommandName="Delete" Text="Delete" />
+                                                                                        <asp:ConfirmButtonExtender ID="conDeleteLoc" ConfirmText="Are you sure you want to Delete this Item?" TargetControlID="btnDeleteLoc" runat="server"></asp:ConfirmButtonExtender>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </ItemTemplate>
+                                                                        <EditItemTemplate>
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td><asp:LinkButton ID="btnUpdateLoc" CausesValidation="true" ValidationGroup="valEditLocation" runat="server" CommandName="Update" Text="Update" /></td>
+                                                                                    <td><asp:LinkButton ID="btnCancelLoc" CausesValidation="false" runat="server" CommandName="Cancel" Text="Cancel" /></td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </EditItemTemplate>
+                                                                    </asp:TemplateField>
+                                                                </Columns>
+                                                                <Columns>
+                                                                    <asp:TemplateField>
+                                                                        <HeaderTemplate>
+                                                                            <asp:Label ID="Label4" runat="server" SkinID="ForceLeft" Text="Zip Code"></asp:Label>
+                                                                            <asp:Label ID="Label3" runat="server" Text="Place"></asp:Label>
+                                                                        </HeaderTemplate>
+                                                                        <ItemTemplate>
+                                                                            <asp:Label ID="lblZipCode" runat="server" Text='<%# Bind("Loc_ZipCode") %>' SkinID="ForceLeft"></asp:Label>        
+                                                                            <asp:Label ID="lblMC" runat="server" Text='<%# Bind("Loc_Desc") %>'></asp:Label>
+                                                                            <asp:Label ID="lblProvince" runat="server" Text='<%# Bind("Loc_Province") %>' Visible="false"></asp:Label>
+                                                                            <asp:Label ID="lblLocID" runat="server" Text='<%# Bind("Loc_ID") %>' Visible="false"></asp:Label>
+                                                                        </ItemTemplate>
+                                                                        <EditItemTemplate>
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <asp:RequiredFieldValidator ValidationGroup="valEditLocation" ID="reqTxtEditZC" ControlToValidate="txtEditZC" runat="server"></asp:RequiredFieldValidator>
+                                                                                        <asp:RegularExpressionValidator ValidationGroup="valEditLocation" ID="regTxtEditZC" ControlToValidate="txtEditZC" ValidationExpression="(0[7-9]\d\d)|([1-8]\d{3})|(9[0-8]\d\d)" runat="server"></asp:RegularExpressionValidator>
+                                                                                        <asp:TextBox ID="txtEditZC" style="width:100px !important" ValidationGroup="valEditLocation" Text='<%# Bind("Loc_ZipCode") %>' runat="server"></asp:TextBox>
+                                                                                    </td>
+                                                                                    <td><asp:RequiredFieldValidator ValidationGroup="valEditLocation" ID="reqTxtEditMC" ControlToValidate="txtEditMC" runat="server"></asp:RequiredFieldValidator>
+                                                                                        <asp:RegularExpressionValidator ValidationGroup="valEditLocation" ID="regTxtEditMC" ControlToValidate="txtEditMC" ValidationExpression="([A-ZÑ][a-zñ]+).?(([ ]?[A-ZÑ]([a-zñ])+){0,2})" runat="server"></asp:RegularExpressionValidator>
+                                                                                        <asp:TextBox ID="txtEditMC" style="width:100px !important" ValidationGroup="valEditLocation" Text='<%# Bind("Loc_Desc") %>' runat="server"></asp:TextBox>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                            <asp:Label ID="lblProvince" runat="server" Text='<%# Bind("Loc_Province") %>' Visible="false"></asp:Label>
+                                                                            <asp:Label ID="lblLocID" runat="server" Text='<%# Bind("Loc_ID") %>' Visible="false"></asp:Label>
+                                                                        </EditItemTemplate>
+                                                                    </asp:TemplateField>
+                                                                </Columns>
+                                                            </asp:GridView>
+                                                        </td>
+                                                    </tr>
+                                                    <tr></tr>
+                                                </table>
+                                                    </fieldset>
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+                                    </asp:Table>
+                                    <ctr:OptionDialog runat="server" 
+                                        ValidationGroup="valLocations" 
+                                        ID="opdLocations" 
+                                        TargetID="btnAddLocations" 
+                                        btnOneText="Ok" btnTwoText="Cancel" 
+                                        Title="Add New Location">
+                                        <MessageTemplate>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label ID="lblMunicipalityCity" runat="server" Text="Municipality/City:"></asp:Label>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtMunicipalityCity" runat="server"></asp:TextBox>
+                                                        <asp:RequiredFieldValidator ValidationGroup="valLocations" ID="reqTxtMunicipalityCity" ControlToValidate="txtMunicipalityCity" runat="server"></asp:RequiredFieldValidator>
+                                                        <asp:RegularExpressionValidator ValidationGroup="valLocations" ID="regTxtMunicipalityCity" ControlToValidate="txtMunicipalityCity" ValidationExpression="([A-ZÑ][a-zñ]+).?(([ ]?[A-ZÑ]([a-zñ])+){0,2})" runat="server"></asp:RegularExpressionValidator>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label ID="lblZipCode" runat="server" Text="Zip Code:"></asp:Label>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtZipCode" runat="server"></asp:TextBox>
+                                                        <asp:RequiredFieldValidator ValidationGroup="valLocations" ID="reqTxtZipCode" ControlToValidate="txtZipCode" runat="server"></asp:RequiredFieldValidator>
+                                                        <asp:RegularExpressionValidator ValidationGroup="valLocations" ID="regTxtZipCode" ControlToValidate="txtZipCode" ValidationExpression="(0[7-9]\d\d)|([1-8]\d{3})|(9[0-8]\d\d)" runat="server"></asp:RegularExpressionValidator>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </MessageTemplate>
+                                    </ctr:OptionDialog>
+                                    <%--<ctr:DataView SearchTitle="Search" runat="server" ID="dvLocations" />--%>
+                                </ContentTemplate>
+                            </asp:TabPanel>
+                            <asp:TabPanel ID="pnlStations" runat="server" HeaderText="TabPanel9">
+                                <HeaderTemplate>Stations</HeaderTemplate>
+                                <ContentTemplate>
+                                    <ctr:OptionDialog runat="server" ID="OptionDialog2" ValidationGroup="valStations" TargetID="Button5" btnOneText="Ok" btnTwoText="Cancel" Title="Add New Location">
+                                        <MessageTemplate>
+                                            <ctr:AddressDetails runat="server" ID="addNewStations" ValidationGroup="valStations" />
+                                        </MessageTemplate>
+                                    </ctr:OptionDialog>
+                                    <ctr:DataView SearchTitle="Search" runat="server" ID="DataView7" />
+                                    <asp:Table runat="server" ID="Table14">
+                                        <asp:TableRow>
+                                            <asp:TableCell HorizontalAlign="Left">
+                                                <asp:Button ID="Button5" runat="server" Text="Add" CausesValidation="false" />
+                                            </asp:TableCell>
+                                            <asp:TableCell HorizontalAlign="Right">
+                                                <asp:Button ID="Button8" runat="server" Text="Edit" CausesValidation="false" OnClick="btnEmployeeAddCancelEvent" />
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+                                    </asp:Table>
+                                </ContentTemplate>
+                            </asp:TabPanel>
+                        </asp:TabContainer>
+                    </asp:View>
+                    <asp:View ID="viewAddEmployee" runat="server">
+                        <div style="padding: 0 50px 0 50px">
+                            <ctr:PersonalDetails runat="server" ID="perEmployee" ValidationGroup="valEmployee" />
+                            <table style="margin-left: 100px">
+                                <tr>
+                                    <td>
+                                        <asp:Label ID="lblUserType" runat="server" Text="User Type:"></asp:Label></td>
+                                    <td>
+                                        <asp:ComboBox ID="cmbUserType" runat="server">
+                                            <asp:ListItem>Courier Representative</asp:ListItem>
+                                            <asp:ListItem>Global Client Office Agent</asp:ListItem>
+                                            <asp:ListItem>Senior Support Operations Specialist</asp:ListItem>
+                                            <asp:ListItem>District Supervisor</asp:ListItem>
+                                            <asp:ListItem>Logistics Assistant</asp:ListItem>
+                                            <asp:ListItem>Head of Operations</asp:ListItem>
+                                        </asp:ComboBox>
+                                    </td>
+                                </tr>
+                            </table>
+                            <h5>
+                                <asp:Label ID="Label1" runat="server" Text="Contact Information"></asp:Label></h5>
+                            <ctr:ContactInformation runat="server" ID="EmpContactInfo" ValidationGroup="valEmployee" />
+                            <asp:Table runat="server" ID="tblBtnsEmployee">
+                                <asp:TableRow>
+                                    <asp:TableCell HorizontalAlign="Left">
+                                        <asp:Button ID="btnAdd" runat="server" Text="Add" ValidationGroup="valEmployee" OnClick="btnEmployeeAddCancelEvent" />
+                                    </asp:TableCell>
+                                    <asp:TableCell HorizontalAlign="Right">
+                                        <asp:Button ID="btnCancel" runat="server" Text="Cancel" CausesValidation="false" OnClick="btnEmployeeAddCancelEvent" />
+                                    </asp:TableCell>
+                                </asp:TableRow>
+                            </asp:Table>
+                        </div>
+                    </asp:View>
+                </asp:MultiView>
+
+               
+
+
+            </ContentTemplate>
+        </asp:UpdatePanel>
+</asp:Content>

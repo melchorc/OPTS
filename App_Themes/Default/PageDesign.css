@@ -1,0 +1,118 @@
+﻿body {
+    background: #b6b7bc;
+    /*background: rgb(159,217,234);*/
+    margin: 0px;
+    padding: 0px;
+    
+    background: url(../../IMAGES/OutsideBck.svg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+
+/* HEADINGS   
+ ==============================================================================================
+*/
+h1
+{
+    margin-left:100px;
+}
+h1, h2, h3, h4, h5, h6
+{
+    color: rgb(28, 117, 189);
+    font-variant: small-caps;
+    text-transform: none;
+    font-weight: 200;
+}
+
+h1
+{
+    font-size: 2em;
+}
+h2 
+{
+    font-size: 1.6em;
+    font-weight: 600;
+}
+
+h3
+{
+    font-size: 1.6em;
+    font-weight:bolder
+}
+
+h4
+{
+    font-size: 1.7em;
+}
+
+h5, h6
+{
+    font-weight:bold;
+    font-size: 1.4em;
+    margin-top:7px;
+    margin-bottom: 5px;
+}
+/* PRIMARY LAYOUT ELEMENTS   
+ ==============================================================================================
+*/
+.Page
+{
+    width: 960px;
+    /*background-color:#ffffff;*/
+    background-color: rgba(255,255,255,0.9);
+    margin: 0px auto 0px auto;
+    border: 1px solid #496077;
+    -webkit-border-radius: 4px;
+    box-shadow: inset 0px 2px 0px 0px rgba(255,255,255,0.35), 0px 2px 6px 0px rgba(0,0,0,0.1);
+    -webkit-box-shadow: inset 0px 2px 0px 0px rgba(255,255,255,0.35), 0px 2px 6px 0px rgba(0,0,0,0.1); 
+}
+
+.Header
+{
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    /*background-color: rgb(28, 117, 189);*/
+    /*background: #4b6c9e;*/
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    height: 134px;
+    background-position:center;
+    background-size:cover;
+    font-size:13px;
+}
+    .Header h2
+    {
+        color:White;
+        position:absolute;
+        left:21%;
+    }
+.Mainmenu
+{
+    position:absolute;
+    top:67px;
+    left: 250px;
+}
+.PageContent
+{
+    /*padding: 0px 50px 60px 50px;*/
+    margin: 0px 8px 8px 8px;
+    min-height: 420px;
+    font-size:13px;
+}
+.Footer
+{
+    color: #4e5766;
+    padding: 8px 0px 0px 0px;
+    margin: 0px auto;
+    text-align: center;
+    line-height: normal;
+}
+.formLayoutContainer
+{
+    margin: 50px;
+}
