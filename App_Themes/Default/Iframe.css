@@ -1,0 +1,9 @@
+﻿iframe
+{
+    border-style: none; 
+    border-color: inherit; 
+    overflow:hidden !important;
+    overflow-x:hidden !important;
+    overflow-y:hidden !important;
+}
+
